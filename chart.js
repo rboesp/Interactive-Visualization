@@ -1,65 +1,54 @@
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 102, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
+var ctx = document.getElementById("myChart").getContext('2d');
+
+// Define the data 
+var data = pop; // Add data values to array
+// End Defining data
+var options = {responsive: true, // Instruct chart js to respond nicely.
+    maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+};
+
+let chartData = {
+    datasets: [
+        {
+            label: 'Population', // Name the series
+            data: data, // Specify the data values array
+            borderColor: '#ef423', // Add custom color border            
+            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
         }
-    }
+    ]
+}
+
+// End Defining data
+var myChart = new Chart(ctx, {
+    type: 'bubble',
+    data: chartData,
+    options: options
 });
 
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-}
+// function addData(chart, label, data) {
+//     chart.data.labels.push(label);
+//     chart.data.datasets.forEach((dataset) => {
+//         dataset.data.push(data);
+//     });
+//     chart.update();
+// }
 
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
+// function removeData(chart) {
+//     chart.data.labels.pop();
+//     chart.data.datasets.forEach((dataset) => {
+//         dataset.data.pop();
+//     });
+//     chart.update();
+// }
 
-function updateConfigByMutating(chart) {
-    chart.data.datasets[0].data[1] = 0
-    chart.update()
-}
+// function updateConfigByMutating(chart) {
+//     chart.data.datasets[0].data[1] = 0
+//     chart.update()
+// }
 
 
-//entry
+// //entry
 
-setTimeout(() => {
-    updateConfigByMutating(myChart)
-}, 1110)
+// setTimeout(() => {
+//     updateConfigByMutating(myChart)
+// }, 1110)
