@@ -1,10 +1,24 @@
-var ctx = document.getElementById("myChart").getContext('2d');
+$(document).ready(() => {
+    let ctx = document.getElementById("myChart").getContext('2d');
 
 // Define the data 
-var data = pop; // Add data values to array
-// End Defining data
-var options = {responsive: true, // Instruct chart js to respond nicely.
+let data = population_data; 
+
+let options = {
+    responsive: true, // Instruct chart js to respond nicely.
     maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+    scales: {
+        xAxes : [{
+            type: "logarithmic",
+            position: 'bottom'
+        }],
+        yAxes : [{
+            ticks: {
+                min: 0,
+                max: 14
+            },
+        }],
+    }
 };
 
 let chartData = {
@@ -19,7 +33,7 @@ let chartData = {
 }
 
 // End Defining data
-var myChart = new Chart(ctx, {
+let myChart = new Chart(ctx, {
     type: 'bubble',
     data: chartData,
     options: options
@@ -51,7 +65,7 @@ function updateConfig(chart) {
         },
         {
             label: 'Pollution', // Name the series
-            data: [{x: 8, y: 8, r: 3}], // Specify the data values array
+            data: [{x: 8, y: 8, r: 10}], // Specify the data values array
             borderColor: '#800000', // Add custom color border            
             backgroundColor: '#FF6347', // Add custom color background (Points and Fill)
         }
@@ -62,6 +76,7 @@ function updateConfig(chart) {
 
 //entry
 
-setTimeout(() => {
-    updateConfig(myChart)
-}, 1110)
+// setTimeout(() => {
+//     updateConfig(myChart)
+// }, 1110)
+})
