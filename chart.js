@@ -89,30 +89,26 @@ let myChart = new Chart(ctx, {
 //     chart.update();
 // }
 
-function updateConfig(chart) {
-    chart.data.datasets = [
-        {
-            label: 'Population', // Name the series
-            data: [{x: 8, y: 4, r: 3}], // Specify the data values array
-            borderColor: '#FF0000', // Add custom color border            
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-        },
-        {
-            label: 'Pollution', // Name the series
-            data: [{x: 8, y: 8, r: 10}], // Specify the data values array
-            borderColor: '#800000', // Add custom color border            
-            backgroundColor: '#FF6347', // Add custom color background (Points and Fill)
-        }
-    ]
-    chart.update()
-}
+// function updateConfig(chart) {
+//     chart.data.datasets = [
+//         {
+//             // label: 'Population', // Name the series
+//             data: [{x: 8, y: 4, r: 3}], // Specify the data values array
+//             borderColor: '#FF0000', // Add custom color border            
+//             backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+//         },
+//         {
+//             label: 'Pollution', // Name the series
+//             data: [{x: 8, y: 8, r: 10}], // Specify the data values array
+//             borderColor: '#800000', // Add custom color border            
+//             backgroundColor: '#FF6347', // Add custom color background (Points and Fill)
+//         }
+//     ]
+//     chart.update()
+// }
 
 
-//entry
 
-// setTimeout(() => {
-//     updateConfig(myChart)
-// }, 1110)
 
 
 //entry point
@@ -122,10 +118,11 @@ output.innerHTML = slider.value;
 
 slider.oninput = function() {
   output.innerHTML = this.value;
-//   const arr = getCurrentYear()
-const arr = population_data[2000]
-console.log(arr);
-  myChart.data.datasets[0].data = arr
-  myChart.update()
+    //   const arr = getCurrentYear() //change later
+    if(!population_data[parseInt(this.value)])return
+    const new_data = population_data[parseInt(this.value)]
+    console.log(new_data);
+    myChart.data.datasets[0].data = new_data
+    myChart.update()
 }
 })
