@@ -1,3 +1,20 @@
+class Country_Data_Point {
+    constructor(x, y, r) {
+        this.x = x
+        this.y = y
+        this.radius = r
+    }
+}
+
+class DataSet {
+    constructor(label, data, borderColor, backgroundColor) {
+        this.label = label
+        this.data = data
+        this.borderColor = borderColor
+        this.backgroundColor = backgroundColor
+    }
+}
+
 $(document).ready(() => {
     let ctx = document.getElementById("myChart").getContext('2d');
 
@@ -10,13 +27,21 @@ let options = {
     scales: {
         xAxes : [{
             type: "logarithmic",
-            position: 'bottom'
+            position: 'bottom',
+            gridLines: {
+                display: false
+            }
         }],
         yAxes : [{
+            type: 'linear',
             ticks: {
-                min: 0,
-                max: 14
+                min: 5,
+                max: 20,
+                stepSize: 5
             },
+            gridLines: {
+                display: false
+            }
         }],
     }
 };
@@ -79,4 +104,14 @@ function updateConfig(chart) {
 // setTimeout(() => {
 //     updateConfig(myChart)
 // }, 1110)
+
+
+//entry point
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
 })
