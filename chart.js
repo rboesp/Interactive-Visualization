@@ -1,25 +1,34 @@
-class Country_Data_Point {
-    constructor(x, y, r) {
-        this.x = x
-        this.y = y
-        this.radius = r
-    }
-}
+// class Country_Data_Point {
+//     constructor(x, y, r) {
+//         this.x = x
+//         this.y = y
+//         this.radius = r
+//     }
+// }
 
-class DataSet {
-    constructor(label, data, borderColor, backgroundColor) {
-        this.label = label
-        this.data = data
-        this.borderColor = borderColor
-        this.backgroundColor = backgroundColor
-    }
+// class DataSet {
+//     constructor(label, data, borderColor, backgroundColor) {
+//         this.label = label
+//         this.data = data
+//         this.borderColor = borderColor
+//         this.backgroundColor = backgroundColor
+//     }
+// }
+
+const timeGap = 5
+let currentYear = 1970
+
+const getCurrentYear = () => {
+    currentYear += timeGap
+    console.log(currentYear);
+    return population_data[currentYear]
 }
 
 $(document).ready(() => {
     let ctx = document.getElementById("myChart").getContext('2d');
 
 // Define the data 
-let data = population_data; 
+let data = getCurrentYear() 
 
 let options = {
     responsive: true, // Instruct chart js to respond nicely.
@@ -113,5 +122,10 @@ output.innerHTML = slider.value;
 
 slider.oninput = function() {
   output.innerHTML = this.value;
+//   const arr = getCurrentYear()
+const arr = population_data[2000]
+console.log(arr);
+  myChart.data.datasets[0].data = arr
+  myChart.update()
 }
 })
