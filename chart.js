@@ -12,8 +12,15 @@ let options = {
     responsive: true, 
     maintainAspectRatio: false,  
     legend: {
-        display: true
-    },
+        labels: {
+            filter: function(legendItem, chartData) {
+             if (legendItem.datasetIndex === 0) {
+               return false;
+             }
+            return true;
+            }
+         }
+     },
     scales: {
         xAxes : [{
             type: "logarithmic",
@@ -92,7 +99,7 @@ let chartData = {
         {
             label: '', 
             data: [],
-            borderColor: 'black',           
+            borderColor: '',           
             backgroundColor: [
       
             ]
