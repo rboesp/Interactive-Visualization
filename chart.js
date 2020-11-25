@@ -1,15 +1,6 @@
 /*
 GLOBAL VARIABLES
 */
-class Country {
-    constructor(name, gdp, avgAge, avgSize = 1) {
-        this.name = "China" 
-        this.x =gdp
-        this.y = avgAge
-        this.r = avgSize
-    }
-}
-
 var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 
@@ -63,6 +54,7 @@ function callServer(year) {
     console.log(year);
     $.post('http://localhost:3000', {year: year})
     .then(data => {
+        console.log(data);
         if(data) handleServerResponse(data)
     })
 }
