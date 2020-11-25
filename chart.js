@@ -47,35 +47,16 @@ let options = {
 FUNCTIONS
 */
 function handleServerResponse(data) {
-    {
-        let chartData = {
-            datasets: [
-                {
-                    label: 'Population', // Name the series
-                    data: data, // Specify the data values array
-                    borderColor: '#ef423', // Add custom color border            
-                    backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
-                }
-            ]
-        }
-        
-        //make the chart initially shown
-        let myChart = new Chart(ctx, {
-            type: 'bubble',
-            data: chartData,
-            options: options
-        })
-    }
+    //this needs to be an update
 }
 
 
 //put in year in call
 function callServer(year) {
     console.log(year);
-    fetch('http://localhost:3000')
-    .then(res => res.json())
+    $.post('http://localhost:3000', {year: year})
     .then(data => {
-        handleServerResponse(data)
+        if(data) handleServerResponse(data)
     })
 }
 
@@ -83,11 +64,9 @@ function callServer(year) {
 EVENT LISTENERS
 */
 slider.oninput = function() {
-    output.innerHTML = this.value;
-
-    //   if(!population_data[parseInt(this.value)])return
-    //   const new_data = population_data[parseInt(this.value)]
-    //   console.log(new_data);
+    output.innerHTML = this.value
+      console.log(this.value)
+      callServer(this.value)
     //   myChart.data.datasets[0].data = new_data
     //   myChart.update()
   }
@@ -96,4 +75,26 @@ slider.oninput = function() {
 /*
 ENTRY POINT
 */
+
+//build here initially
+{
+    let chartData = {
+        datasets: [
+            {
+                label: 'Population', // Name the series
+                data: data, // Specify the data values array
+                borderColor: '#ef423', // Add custom color border            
+                backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            }
+        ]
+    }
+    
+    //make the chart initially shown
+    let myChart = new Chart(ctx, {
+        type: 'bubble',
+        data: chartData,
+        options: options
+    })
+} 
+
 callServer(1975)

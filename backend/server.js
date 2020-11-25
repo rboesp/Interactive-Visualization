@@ -17,12 +17,18 @@ var population_data = {
 const express = require('express')
 const cors = require('cors')
 const app = express()
+var bodyParser = require('body-parser')
 const port = 3000
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(cors())
 
-app.get('/', (req, res) => {
-  res.json(population_data[1975]) //accept body parameter and use that to get the year data
+app.post('/', (req, res) => {
+    console.log(req.body)
+    const year = parseInt(req.body.year)
+    if(!population_data[year]) res.json(false)
+    res.json(population_data[year]) //accept body parameter and use that to get the year data
 })
 
 app.listen(port, () => {
