@@ -1,4 +1,5 @@
 /*GLOBAL VARIABLES */
+
 class Country {
     constructor(data) {
         this.name = data[0]
@@ -8,24 +9,28 @@ class Country {
     }
 }
 
-/*server setup*/
+//server setup
 
-//npm packages
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
+    //npm packages
+    const express = require('express')
+    const cors = require('cors')
+    const bodyParser = require('body-parser')
+
+
+    //middleware
+    const app = express()
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use(cors())
+
+    //port
+    const port = process.env.PORT || 3000
+
+//
+
+
+//read files setup
 const fs = require("fs");
 const util = require("util");
-
-
-//middleware
-const app = express()
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors())
-
-//port
-const port = process.env.PORT || 3000
-
 const readFileAsync = util.promisify(fs.readFile);
 
 
@@ -43,12 +48,12 @@ async function readData(resolve, year) {
 }
 
 const fillPopulationData = (years) => {
-    let obj = {}
+    let cty_stats = {}
     years.forEach(async year => {
         const data = await new Promise((resolve) => readData(resolve, year))
-        obj[year] = data
+        cty_stats[year] = data
     })
-    return obj
+    return cty_stats
 }
 
 const handleSliderChange = (req, res) => {
@@ -57,7 +62,7 @@ const handleSliderChange = (req, res) => {
     res.json(population_data[year]) 
 }
 
-//routes
+/*ROUTES */
 app.post('/', handleSliderChange)
 
 
