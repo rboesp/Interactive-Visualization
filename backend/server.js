@@ -14,10 +14,8 @@ const bodyParser = require('body-parser')
 
 const fs = require("fs");
 const util = require("util");
-const { start } = require('repl')
 
 const readFileAsync = util.promisify(fs.readFile);
-const writeFileAsync = util.promisify(fs.writeFile);
 
 const readCountryData = () => {
     return new Promise(async (res) => {
@@ -35,8 +33,19 @@ const readCountryData = () => {
     })
 }
 
+
+//change this so that it reads from file with years in it
+//probably will be array ->implicit years by index or object -> explicit years
+async function readData(resolve) {
+    const data = await readFileAsync('country-data.csv', 'utf-8')
+    const splitData = data.split('\r\n').map(arr => arr.split(", "))
+    const parsedData = splitData.map((arr) => new Country(arr))
+    console.log(parsedData)
+    resolve(parsedData)
+}
+
 const startServer = async() => {
-    const data = await readCountryData()
+    const data = await new Promise(readData)
 
     const _1975 = data //change this so that all are taking from data
     const _1980 = [ { name: "China", x: 500,y: 12,r: 3}, { name: "Ghana", x: 2,y: 14, r: 3}]
