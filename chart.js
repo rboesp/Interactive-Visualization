@@ -23,7 +23,7 @@ let options = {
             type: 'linear',
             ticks: {
                 min: 5,
-                max: 20,
+                max: 85,
                 stepSize: 5
             },
             gridLines: {
