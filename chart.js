@@ -11,6 +11,9 @@ let ctx = document.getElementById("myChart").getContext('2d');
 let options = {
     responsive: true, 
     maintainAspectRatio: false,  
+    legend: {
+        display: true
+    },
     scales: {
         xAxes : [{
             type: "logarithmic",
@@ -38,8 +41,18 @@ let options = {
 FUNCTIONS
 */
 
+let count = 0
+let colors = ['red', 'blue', 'green', 'pink']
+
 function updateChart(data) {
-      myChart.data.datasets[0].data = data
+    data.forEach(element => {
+        myChart.data.datasets.push( {
+            label: element.name, 
+            data: data,
+            borderColor: 'black',           
+            backgroundColor: colors[count++]
+        })
+    });
       myChart.update()
 }
 
@@ -77,10 +90,12 @@ ENTRY POINT
 let chartData = {
     datasets: [
         {
-            label: 'Population', // Name the series
-            data: [], // Specify the data values array
-            borderColor: '#ef423', // Add custom color border            
-            backgroundColor: '#2196f3', // Add custom color background (Points and Fill)
+            label: '', 
+            data: [],
+            borderColor: 'black',           
+            backgroundColor: [
+      
+            ]
         }
     ]
 }
