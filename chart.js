@@ -52,23 +52,16 @@ let options = {
 FUNCTIONS
 */
 
-let countryCount = 0
+let count = 0
 let colors = ['red', 'blue', 'green', 'pink']
 
 function updateChart(data) {
-    // console.log(data[count++]);
-    // console.log(myChart.data.datasets
-    data.forEach(country => {
-        const t = data[countryCount]
-        console.log(country);
-        myChart.data.datasets.push( {
-            label: country.name, 
-            data: [t],
-            borderColor: 'white',           
-            backgroundColor: colors[countryCount++]
-        })
+    
+    myChart.data.datasets.forEach((dataSet,i) => {
+        const countryStats = data[i]
+        dataSet.data = [countryStats]
     });
-      myChart.update()
+    myChart.update()
 }
 
 function handleServerResponse(data) {
@@ -107,16 +100,26 @@ let two = {x: 15, y: 15, z: 6}
 //build here initially
 let chartData = {
     datasets: [ //todo: fgiure out two datasets with two colors in legend and bubble
-        // {
-        //     label: "",
-        //     data: [],
-        //     backgroundColor: ""
-        // },
-        // {
-        //     label: "",
-        //     data:[ ],
-        //     backgroundColor: ""
-        // }
+        {
+            label: "China",
+            data: [],
+            backgroundColor: "Red"
+        },
+        {
+            label: "Ghana",
+            data:[ ],
+            backgroundColor: "Blue"
+        },
+        {
+            label: "Japan",
+            data: [],
+            backgroundColor: "Green"
+        },
+        {
+            label: "Nigeria",
+            data:[ ],
+            backgroundColor: "Pink"
+        },
     ]
 }
 
