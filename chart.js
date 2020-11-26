@@ -9,7 +9,70 @@ output.innerHTML = currentYear
 let ctx = document.getElementById("myChart").getContext('2d');
 
 
+let countryDataSets = [ 
+    {
+        label: "China",
+        data: [],
+        backgroundColor: "red"
+    },
+    {
+        label: "Japan",
+        data: [],
+        backgroundColor: "green"
+    },
+    {
+        label: "Nigeria",
+        data:[ ],
+        backgroundColor: "pink"
+    },
+    {
+        label: "India",
+        data: [],
+        backgroundColor: "purple"
+    },
+    {
+        label: "Brazil",
+        data:[ ],
+        backgroundColor: "turquoise"
+    },
+    {
+        label: "Germany",
+        data: [],
+        backgroundColor: "darkred"
+    },
+    {
+        label: "France",
+        data:[ ],
+        backgroundColor: "darkblue"
+    },
+    {
+        label: "United States",
+        data: [],
+        backgroundColor: "blue"
+    },
+    {
+        label: "Argentina",
+        data: [],
+        backgroundColor: "skyblue"
+    }
+]
+
+
 let options = {
+    onClick: (evt, item) => {
+        // console.log(item[0]);
+        if(!item[0]) return
+        let index = item[0]['_datasetIndex'];
+        console.log(countryDataSets[index].label);
+        // const data
+        let data = item[0]["_chart"].config.data.datasets[index].data[0]
+        console.log(`
+        NAME: ${data.name}
+        GDP: ${data.x}
+        LIFE EXPECTANCY:${data.y}
+        LAND MASS:${data.r}
+        `);
+    },
     responsive: true, 
     maintainAspectRatio: false,
     title: {
@@ -81,7 +144,6 @@ function callServer(year) {
     // console.log(year);
     $.post('http://localhost:3000', {year: year})
     .then(data => {
-        console.log(data);
         if(data) handleServerResponse(data)
     })
 }
@@ -104,53 +166,8 @@ let two = {x: 15, y: 15, z: 6}
 
 //build here initially
 let chartData = {
-    datasets: [ //TODO:need to make the countries not hardcoded here, probably from server response
-        {
-            label: "China",
-            data: [],
-            backgroundColor: "red"
-        },
-        {
-            label: "Japan",
-            data: [],
-            backgroundColor: "green"
-        },
-        {
-            label: "Nigeria",
-            data:[ ],
-            backgroundColor: "pink"
-        },
-        {
-            label: "India",
-            data: [],
-            backgroundColor: "purple"
-        },
-        {
-            label: "Brazil",
-            data:[ ],
-            backgroundColor: "turquoise"
-        },
-        {
-            label: "Germany",
-            data: [],
-            backgroundColor: "darkred"
-        },
-        {
-            label: "France",
-            data:[ ],
-            backgroundColor: "darkblue"
-        },
-        {
-            label: "United States",
-            data: [],
-            backgroundColor: "blue"
-        },
-        {
-            label: "Argentina",
-            data: [],
-            backgroundColor: "skyblue"
-        }
-    ]
+    //TODO:need to make the countries not hardcoded here, probably from server response
+    datasets: countryDataSets
 }
 
 //make the chart initially shown
@@ -159,6 +176,24 @@ let myChart = new Chart(ctx, {
     data: chartData,
     options: options
 })
+let canvas = document.getElementById('myChart')
+
+canvas.onclick = function (evt) {
+    // console.log(evt.target);
+    // console.log('hi');
+    // var activePoints = myChart.getElementsAtEvent(evt);
+    // var chartData = activePoints[0]['_chart'].config.data;
+    // console.log(chartData.datasets);
+    // var idx = activePoints[0]['_index'];
+
+    // console.log(activePoints[0]);
+    // var label = chartData.labels[idx];
+    // var value = chartData.datasets[0].data[idx];
+    // console.log(chartData);
+    // console.log(idx);
+    // console.log(label);
+    // console.log(value);
+}
 
 //this gets the initial data for the chart
 callServer(currentYear)
