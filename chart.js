@@ -22,7 +22,7 @@ let options = {
             position: 'bottom',
             ticks: {
                 min: 1,
-                max: 2000,
+                max: 11000,
                 callback: function (value, index, values) {
                     return Number(value.toString());//pass tick values as a string into Number function
                 }
@@ -36,7 +36,7 @@ let options = {
                 chartObj.ticks.push(10);
                 chartObj.ticks.push(100);
                 chartObj.ticks.push(1000);
-                chartObj.ticks.push(2000);
+                chartObj.ticks.push(10000);
             }
         }],
         yAxes : [{
