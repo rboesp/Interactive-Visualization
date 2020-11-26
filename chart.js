@@ -108,57 +108,47 @@ let chartData = {
         {
             label: "China",
             data: [],
-            backgroundColor: "Red"
-        },
-        {
-            label: "Ghana",
-            data:[ ],
-            backgroundColor: "Blue"
+            backgroundColor: "red"
         },
         {
             label: "Japan",
             data: [],
-            backgroundColor: "Green"
+            backgroundColor: "green"
         },
         {
             label: "Nigeria",
             data:[ ],
-            backgroundColor: "Pink"
+            backgroundColor: "pink"
         },
         {
             label: "India",
             data: [],
-            backgroundColor: "Purple"
+            backgroundColor: "purple"
         },
         {
             label: "Brazil",
             data:[ ],
-            backgroundColor: "Brown"
+            backgroundColor: "turquoise"
         },
         {
             label: "Germany",
             data: [],
-            backgroundColor: "Tomatoe"
+            backgroundColor: "darkred"
         },
         {
             label: "France",
             data:[ ],
-            backgroundColor: "Orange"
+            backgroundColor: "darkblue"
         },
         {
             label: "United States",
             data: [],
-            backgroundColor: "Silver"
-        },
-        {
-            label: "Canada",
-            data:[ ],
-            backgroundColor: "Gold"
+            backgroundColor: "blue"
         },
         {
             label: "Argentina",
             data: [],
-            backgroundColor: "Yellow"
+            backgroundColor: "skyblue"
         }
     ]
 }
