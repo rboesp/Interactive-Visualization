@@ -81,7 +81,7 @@ function callServer(year) {
     // console.log(year);
     $.post('http://localhost:3000', {year: year})
     .then(data => {
-        // console.log(data);
+        console.log(data);
         if(data) handleServerResponse(data)
     })
 }
@@ -91,7 +91,7 @@ EVENT LISTENERS
 */
 slider.oninput = function() {
     output.innerHTML = this.value
-    console.log(this.value)
+    // console.log(this.value)
     callServer(this.value)
   }
 
@@ -125,6 +125,41 @@ let chartData = {
             data:[ ],
             backgroundColor: "Pink"
         },
+        {
+            label: "India",
+            data: [],
+            backgroundColor: "Purple"
+        },
+        {
+            label: "Brazil",
+            data:[ ],
+            backgroundColor: "Brown"
+        },
+        {
+            label: "Germany",
+            data: [],
+            backgroundColor: "Tomatoe"
+        },
+        {
+            label: "France",
+            data:[ ],
+            backgroundColor: "Orange"
+        },
+        {
+            label: "United States",
+            data: [],
+            backgroundColor: "Silver"
+        },
+        {
+            label: "Canada",
+            data:[ ],
+            backgroundColor: "Gold"
+        },
+        {
+            label: "Argentina",
+            data: [],
+            backgroundColor: "Yellow"
+        }
     ]
 }
 
