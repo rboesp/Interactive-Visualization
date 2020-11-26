@@ -5,6 +5,7 @@ var slider = document.getElementById("myRange");
 var output = document.getElementById("demo");
 
 let currentYear = 1975
+output.innerHTML = currentYear
 let ctx = document.getElementById("myChart").getContext('2d');
 
 
@@ -13,7 +14,7 @@ let options = {
     maintainAspectRatio: false,
     title: {
         display: true,
-        text: 'GDP vs LAND AREA vs LIFE EXPECTACY'
+        text: 'GDP vs LAND AREA vs LIFE EXPECTACY FROM 1975 - 2000'
     },  
     scales: {
         xAxes : [{
@@ -103,7 +104,7 @@ let two = {x: 15, y: 15, z: 6}
 
 //build here initially
 let chartData = {
-    datasets: [ //todo: fgiure out two datasets with two colors in legend and bubble
+    datasets: [ //TODO:need to make the countries not hardcoded here, probably from server response
         {
             label: "China",
             data: [],
@@ -134,6 +135,5 @@ let myChart = new Chart(ctx, {
     options: options
 })
 
-
+//this gets the initial data for the chart
 callServer(currentYear)
-output.innerHTML = currentYear
