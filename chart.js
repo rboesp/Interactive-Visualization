@@ -13,32 +13,37 @@ let options = {
     maintainAspectRatio: false,
     title: {
         display: true,
-        text: 'CHey!'
+        text: 'GDP vs LAND AREA vs LIFE EXPECTACY'
     },  
-    legend: {
-        // labels: {
-        //     filter: function(legendItem, chartData) {
-        //      if (legendItem.datasetIndex === 0) {
-        //        return false;
-        //      }
-        //     return true;
-        //     }
-        //  }
-     },
     scales: {
         xAxes : [{
             type: "logarithmic",
             position: 'bottom',
+            ticks: {
+                min: 1,
+                max: 2000,
+                callback: function (value, index, values) {
+                    return Number(value.toString());//pass tick values as a string into Number function
+                }
+            },
             gridLines: {
                 display: false
+            },
+            afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
+                chartObj.ticks = [];
+                chartObj.ticks.push(0);
+                chartObj.ticks.push(10);
+                chartObj.ticks.push(100);
+                chartObj.ticks.push(1000);
+                chartObj.ticks.push(2000);
             }
         }],
         yAxes : [{
             type: 'linear',
             ticks: {
-                min: 5,
-                max: 85,
-                stepSize: 5
+                min: 0,
+                max: 100,
+                stepSize: 25
             },
             gridLines: {
                 display: false
@@ -67,7 +72,6 @@ function updateChart(data) {
 function handleServerResponse(data) {
     //this needs to be an update
     updateChart(data)
-    // callPoop(data)
 }
 
 
@@ -130,18 +134,6 @@ let myChart = new Chart(ctx, {
     options: options
 })
 
-function callPoop(data) {
-    console.log(data);
-    myChart.data.datasets[0].data.push(one)
-    myChart.data.datasets[0].label = "Hello"
-    myChart.data.datasets[0].backgroundColor = 'Brown'
-    myChart.data.datasets[1].data.push(two)
-    myChart.data.datasets[1].label = "Goodbye"
-    myChart.data.datasets[1].backgroundColor = 'Red'
-    myChart.update()
-}
 
-
-callServer(1975)
-// callPoop()
-output.innerHTML = 1975
+callServer(currentYear)
+output.innerHTML = currentYear
