@@ -181,11 +181,15 @@ let canvas = document.getElementById('myChart2')
 
 var ctx2 = document.getElementById('myChart2');
 var myChart2 = new Chart(ctx2, {
-    type: 'line',
+    type: 'scatter',
     data: {
-      labels: [70,72,76,78,79], //life span for current country
       datasets: [{ 
-          data: [400,500,600,700,1000], //gdp for current country
+          data: [
+            {x:60,y:400}, 
+            {x:70, y:500},
+            {x:71, y:600},
+            {x:72, y:700},
+        ],
           borderColor: "#3e95cd",
           fill: false
         }
@@ -198,7 +202,20 @@ var myChart2 = new Chart(ctx2, {
       },
       legend: {
           display: false
-      }
+      },
+      scales: {
+        xAxes : [{
+            type: 'linear',
+            ticks: {
+                min: 50,
+                max: 100,
+                stepSize: 5
+            },
+            gridLines: {
+                display: false
+            }
+        }]
+      },
     }
   });
 
