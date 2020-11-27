@@ -61,6 +61,7 @@ let countryDataSets = [
 let options = {
     onClick: (evt, item) => {
         // console.log(item[0]);
+        $("#chart-2").css('display', 'block')
         if(!item[0]) return
         let index = item[0]['_datasetIndex'];
         console.log(countryDataSets[index].label);
@@ -176,24 +177,45 @@ let myChart = new Chart(ctx, {
     data: chartData,
     options: options
 })
-let canvas = document.getElementById('myChart')
+let canvas = document.getElementById('myChart2')
 
-canvas.onclick = function (evt) {
-    // console.log(evt.target);
-    // console.log('hi');
-    // var activePoints = myChart.getElementsAtEvent(evt);
-    // var chartData = activePoints[0]['_chart'].config.data;
-    // console.log(chartData.datasets);
-    // var idx = activePoints[0]['_index'];
-
-    // console.log(activePoints[0]);
-    // var label = chartData.labels[idx];
-    // var value = chartData.datasets[0].data[idx];
-    // console.log(chartData);
-    // console.log(idx);
-    // console.log(label);
-    // console.log(value);
-}
+var ctx2 = document.getElementById('myChart2');
+var myChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
 
 //this gets the initial data for the chart
 callServer(currentYear)
