@@ -196,6 +196,7 @@ var myChart2 = new Chart(ctx2, {
       ]
     },
     options: {
+        maintainAspectRatio: false,
       title: {
         display: true,
         text: 'GDP vs LIFESPAN CLOSEUP'

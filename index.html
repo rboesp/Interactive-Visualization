@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h3>Change the slider for different years</h3>
@@ -12,12 +13,14 @@
         <input type="range" min="1975" max="2000" value="50" class="slider" id="myRange">
     </div>
       <h4>YEAR: <span id="demo"></span></h4>
-    <div id="chart-1">
-        <canvas id="myChart" width="200" height="200"></canvas>
-    </div>
-    <div id="chart-2" style='display:block;'>
-        <!-- <h1>hello</h1> -->
-        <canvas id="myChart2" width="200" height="200"></canvas>
+    <div id="chart-container">
+        <div id="chart-1">
+            <canvas id="myChart" width="200" height="200"></canvas>
+        </div>
+        <div id="chart-2" style='display:block;'>
+            <!-- <h1>hello</h1> -->
+            <canvas id="myChart2" height="100" width="100"></canvas>
+        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="chart.js"></script>

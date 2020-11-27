@@ -1,0 +1,17 @@
+#chart-container {
+    /* border: 1px dashed red; */
+    display: flex;
+    flex-direction: column;
+}
+
+#chart-1 > canvas {
+    border: 1px dashed purple;
+    height: 500px !important;
+    width: 100% !important;
+}
+
+#chart-2 > canvas {
+    border: 1px dashed green;
+    height: 350px !important;
+    width: 50% !important;
+}
