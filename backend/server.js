@@ -3,8 +3,8 @@
 class Country {
     constructor(data) {
         this.name = data[0]
-        this.x = parseInt(data[1])
-        this.y = parseInt(data[2])
+        this.y = parseInt(data[1]) //change here (2/2) to change x  and y axis
+        this.x = parseInt(data[2])
         this.r = parseInt(data[3])*5 //to make the bubbles look bigger
     }
 }

@@ -80,9 +80,9 @@ let options = {
         text: 'GDP vs LAND AREA vs LIFE EXPECTACY FROM 1975 - 2000'
     },  
     scales: {
-        xAxes : [{
+        yAxes : [{
             type: "logarithmic",
-            position: 'bottom',
+            position: 'left',
             ticks: {
                 min: 1,
                 max: 11000,
@@ -102,7 +102,7 @@ let options = {
                 chartObj.ticks.push(10000);
             }
         }],
-        yAxes : [{
+        xAxes : [{
             type: 'linear',
             ticks: {
                 min: 0,
