@@ -2,21 +2,21 @@
 GLOBAL VARIABLES
 */
 var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
+var sliderOutputEl = document.getElementById("demo");
 
-let currentYear = 1975
-output.innerHTML = currentYear
+let startingYear = 1975
+sliderOutputEl.innerHTML = startingYear
 
 let ctx = document.getElementById("myChart").getContext('2d');
 var ctx2 = document.getElementById('myChart2');
+
+const _URL = 'http://localhost:3000'
 
 
 /*
 FUNCTIONS
 */
 
-let count = 0
-let colors = ['red', 'blue', 'green', 'pink']
 
 const clickOnBubble = (evt, item) => {
     // console.log(item[0]);
@@ -51,20 +51,17 @@ function handleServerResponse(data) {
 
 //put in year in call
 function getBubbleChartData(year) {
-    // console.log(year);
-    $.post('http://localhost:3000', {year: year})
-    .then(data => {
-        if(data) handleServerResponse(data)
-    })
+    return $.post(_URL, {year: year})
 }
 
 /*
 EVENT LISTENERS
 */
-slider.oninput = function() {
+slider.oninput = async function() {
     const year = this.value
-    output.innerHTML = year
-    getBubbleChartData(year)
+    sliderOutputEl.innerHTML = year
+    const data = await getBubbleChartData(year)
+    if(data) updateChart(data)
 }
 
 
@@ -171,4 +168,9 @@ var lineChart = new Chart(ctx2, {
   });
 
 //this gets the initial data for the chart
-getBubbleChartData(currentYear)
+async function start(year) {
+    const data = await getBubbleChartData(year)
+    if(data) updateChart(data)
+}
+
+start(startingYear)
