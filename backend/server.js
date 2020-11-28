@@ -68,7 +68,7 @@ async function read(resolve, year) {
     const d = data.split('\r\n')
     const arr = d.filter( line => line.includes('China') )
     const splitArr = arr[0].split(', ')
-    const returnData = {x: parseInt(splitArr[2]), y: parseInt(splitArr[1])}
+    const returnData = {year: year, x: parseInt(splitArr[2]), y: parseInt(splitArr[1])}
     resolve(returnData)
 }
 
@@ -78,14 +78,25 @@ function fillLineChartData(years) {
         const data = await new Promise((resolve) => read(resolve, year))
         lineData.push(data)
     })
-    console.log(lineData);
     return lineData
 }
 
 /*ROUTES */
+function sortByYear( a, b ) {
+    if ( a.year < b.year ){
+      return -1;
+    }
+    if ( a.year > b.year ){
+      return 1;
+    }
+    return 0;
+  }
+  
 
 app.post('/', handleSliderChange)
 app.post('/line', (req, res) => {
+    // console.log(lineData);
+    lineData.sort(sortByYear)
     console.log(lineData);
     res.json(lineData)
 })
