@@ -5,13 +5,13 @@
 }
 
 #chart-1 > canvas {
-    border: 1px dashed purple;
+    /* border: 1px dashed purple; */
     height: 500px !important;
     width: 100% !important;
 }
 
 #chart-2 > canvas {
-    border: 1px dashed green;
+    /* border: 1px dashed green; */
     /* height: 350px !important; */
     width: 100% !important;
 }

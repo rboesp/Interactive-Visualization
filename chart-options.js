@@ -60,10 +60,15 @@ const lineChartOptions = {
         xAxes : [{
             type: 'linear',
             ticks: {
-                min: 50,
+                min: 40,
                 max: 100,
                 stepSize: 5
             },
+            gridLines: {
+                display: false
+            }
+        }],
+        yAxes: [{
             gridLines: {
                 display: false
             }
