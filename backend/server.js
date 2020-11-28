@@ -63,22 +63,25 @@ const handleSliderChange = (req, res) => {
     res.json(population_data[year]) 
 }
 
-async function read(resolve, year) {
+async function read(resolve, year, country) {
+    console.log(country);
     const data = await readFileAsync(`store/country-data-${year}.csv`, 'utf-8')
     const d = data.split('\r\n')
-    const arr = d.filter( line => line.includes('China') )
+    const arr = d.filter( line => line.includes(country) )
     const splitArr = arr[0].split(', ')
     const returnData = {year: year, x: parseInt(splitArr[2]), y: parseInt(splitArr[1])}
     resolve(returnData)
 }
 
-function fillLineChartData(years) {
-    const lineData = []
+function fillLineChartData(years, country) {
+    const points = []
     years.forEach(async year => {
-        const data = await new Promise((resolve) => read(resolve, year))
-        lineData.push(data)
+        const point = await new Promise((resolve) => read(resolve, year, country))
+        points.push(point)
+        console.log(points);
     })
-    return lineData
+    console.log(points);
+    return points
 }
 
 /*ROUTES */
@@ -95,17 +98,22 @@ function sortByYear( a, b ) {
 
 app.post('/', handleSliderChange)
 app.post('/line', (req, res) => {
-    // console.log(lineData);
-    lineData.sort(sortByYear)
+    //here change countires to whatever comes in
+    lineData[req.body.country].sort(sortByYear) 
     console.log(lineData);
-    res.json(lineData)
+    res.json(lineData[req.body.country])
 })
 
 /*ENTRY POINT */
 const years = [1975, 1980, 1985, 1990, 1995, 2000]
 
 const population_data = fillBubbleChartData(years)
-const lineData = fillLineChartData(years)
+const lineData = {}
+let c = ['China', 'Japan']
+c.forEach( co => {
+    // console.log(co);
+    lineData[co] = fillLineChartData(years, co)
+})
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

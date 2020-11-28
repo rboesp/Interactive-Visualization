@@ -4,8 +4,10 @@ GLOBAL VARIABLES
 var slider = document.getElementById("myRange");
 var sliderYearTxt = document.getElementById("demo");
 
-let startingYear = 1975
+const startingYear = 1975
 sliderYearTxt.innerHTML = startingYear
+
+const startingCountry = 'China'
 
 let ctx = document.getElementById("myChart").getContext('2d');
 var ctx2 = document.getElementById('myChart2');
@@ -32,6 +34,7 @@ const clickOnBubble = (evt, item) => {
     LIFE EXPECTANCY:${data.y}
     LAND MASS:${data.r}
     `);
+    popluateLineChart(data.name)
 }
 
 function updateChart(data) {
@@ -49,14 +52,25 @@ function getBubbleChartData(year) {
     return $.post(_URL, {year: year})
 }
 
+function popluateLineChart(country) {
+    $.post(_URL +'/line/', {country: country}).then(data => {
+        lineChart.data.datasets[0].data = data
+        lineChart.update()
+    })
+}
+
+async function populateBubbleChart(year) {
+    const data = await getBubbleChartData(year)
+    if(data) updateChart(data)
+}
+
 /*
 EVENT LISTENERS
 */
 slider.oninput = async function() {
     const year = this.value
     sliderYearTxt.innerHTML = year
-    const data = await getBubbleChartData(year)
-    if(data) updateChart(data)
+    populateBubbleChart(year)
 }
 
 
@@ -148,12 +162,7 @@ var lineChart = new Chart(ctx2, {
     type: 'scatter',
     data: {
       datasets: [{ 
-          data: [
-            {x:60,y:400}, 
-            {x:70, y:500},
-            {x:71, y:600},
-            {x:72, y:700},
-        ],
+          data: [],
           borderColor: "#3e95cd",
           fill: false
         }
@@ -162,22 +171,9 @@ var lineChart = new Chart(ctx2, {
     options: lineChartOptions
   });
 
-function lineChartData(country) {
-    $.post(_URL +'/line/', {country: country}).then(data => {
-        lineChart.data.datasets[0].data = data
-        lineChart.update()
-    })
-}
-
-//this gets the initial data for the chart
-async function start(year) {
-    const data = await getBubbleChartData(year)
-    if(data) updateChart(data)
-}
-
 
 /*
 ENTRY POINT
 */
-start(startingYear)
-lineChartData('China')
+populateBubbleChart(startingYear) //change this to populate bubble chart
+popluateLineChart(startingCountry)
