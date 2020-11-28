@@ -6,74 +6,74 @@ var output = document.getElementById("demo");
 
 let currentYear = 1975
 output.innerHTML = currentYear
+
 let ctx = document.getElementById("myChart").getContext('2d');
+var ctx2 = document.getElementById('myChart2');
 
 
-let countryDataSets = [ 
-    {
-        label: "China",
-        data: [],
-        backgroundColor: "red"
-    },
-    {
-        label: "Japan",
-        data: [],
-        backgroundColor: "green"
-    },
-    {
-        label: "Nigeria",
-        data:[ ],
-        backgroundColor: "pink"
-    },
-    {
-        label: "India",
-        data: [],
-        backgroundColor: "purple"
-    },
-    {
-        label: "Brazil",
-        data:[ ],
-        backgroundColor: "turquoise"
-    },
-    {
-        label: "Germany",
-        data: [],
-        backgroundColor: "darkred"
-    },
-    {
-        label: "France",
-        data:[ ],
-        backgroundColor: "darkblue"
-    },
-    {
-        label: "United States",
-        data: [],
-        backgroundColor: "blue"
-    },
-    {
-        label: "Argentina",
-        data: [],
-        backgroundColor: "skyblue"
-    }
-]
+/*
+FUNCTIONS
+*/
+
+let count = 0
+let colors = ['red', 'blue', 'green', 'pink']
+
+const clickOnBubble = (evt, item) => {
+    // console.log(item[0]);
+    $("#chart-2").css('display', 'block')
+    if(!item[0]) return
+    let index = item[0]['_datasetIndex'];
+    console.log(countryDataSets[index].label);
+    // const data
+    let data = item[0]["_chart"].config.data.datasets[index].data[0]
+    console.log(`
+    NAME: ${data.name}
+    GDP: ${data.x}
+    LIFE EXPECTANCY:${data.y}
+    LAND MASS:${data.r}
+    `);
+}
+
+function updateChart(data) {
+    
+    bubbleChart.data.datasets.forEach((dataSet,i) => {
+        const countryStats = data[i]
+        dataSet.data = [countryStats]
+    });
+    bubbleChart.update()
+}
+
+function handleServerResponse(data) {
+    //this needs to be an update
+    updateChart(data)
+}
 
 
-let options = {
-    onClick: (evt, item) => {
-        // console.log(item[0]);
-        $("#chart-2").css('display', 'block')
-        if(!item[0]) return
-        let index = item[0]['_datasetIndex'];
-        console.log(countryDataSets[index].label);
-        // const data
-        let data = item[0]["_chart"].config.data.datasets[index].data[0]
-        console.log(`
-        NAME: ${data.name}
-        GDP: ${data.x}
-        LIFE EXPECTANCY:${data.y}
-        LAND MASS:${data.r}
-        `);
-    },
+//put in year in call
+function getBubbleChartData(year) {
+    // console.log(year);
+    $.post('http://localhost:3000', {year: year})
+    .then(data => {
+        if(data) handleServerResponse(data)
+    })
+}
+
+/*
+EVENT LISTENERS
+*/
+slider.oninput = function() {
+    const year = this.value
+    output.innerHTML = year
+    getBubbleChartData(year)
+}
+
+
+/*
+ENTRY POINT
+*/
+
+const bubbleChartOptions = {
+    onClick: clickOnBubble,
     responsive: true, 
     maintainAspectRatio: false,
     title: {
@@ -117,70 +117,42 @@ let options = {
     }
 };
 
-
-/*
-FUNCTIONS
-*/
-
-let count = 0
-let colors = ['red', 'blue', 'green', 'pink']
-
-function updateChart(data) {
-    
-    myChart.data.datasets.forEach((dataSet,i) => {
-        const countryStats = data[i]
-        dataSet.data = [countryStats]
-    });
-    myChart.update()
+const lineChartOptions = {
+        maintainAspectRatio: false,
+    title: {
+        display: true,
+        text: 'GDP vs LIFESPAN CLOSEUP'
+    },
+    legend: {
+        display: false
+    },
+    scales: {
+        xAxes : [{
+            type: 'linear',
+            ticks: {
+                min: 50,
+                max: 100,
+                stepSize: 5
+            },
+            gridLines: {
+                display: false
+            }
+        }]
+    }
 }
 
-function handleServerResponse(data) {
-    //this needs to be an update
-    updateChart(data)
-}
-
-
-//put in year in call
-function callServer(year) {
-    // console.log(year);
-    $.post('http://localhost:3000', {year: year})
-    .then(data => {
-        if(data) handleServerResponse(data)
-    })
-}
-
-/*
-EVENT LISTENERS
-*/
-slider.oninput = function() {
-    output.innerHTML = this.value
-    // console.log(this.value)
-    callServer(this.value)
-  }
-
-
-/*
-ENTRY POINT
-*/
-let one = {x: 5, y: 5, z: 3}
-let two = {x: 15, y: 15, z: 6}
-
-//build here initially
-let chartData = {
-    //TODO:need to make the countries not hardcoded here, probably from server response
-    datasets: countryDataSets
-}
-
-//make the chart initially shown
-let myChart = new Chart(ctx, {
+//make the charts
+let bubbleChart = new Chart(ctx, {
     type: 'bubble',
-    data: chartData,
-    options: options
+    data: {
+        //TODO:need to make the countries not hardcoded here, probably from server response
+        datasets: countryDataSets
+    },
+    options: bubbleChartOptions
 })
-let canvas = document.getElementById('myChart2')
 
-var ctx2 = document.getElementById('myChart2');
-var myChart2 = new Chart(ctx2, {
+
+var lineChart = new Chart(ctx2, {
     type: 'scatter',
     data: {
       datasets: [{ 
@@ -195,30 +167,8 @@ var myChart2 = new Chart(ctx2, {
         }
       ]
     },
-    options: {
-        maintainAspectRatio: false,
-      title: {
-        display: true,
-        text: 'GDP vs LIFESPAN CLOSEUP'
-      },
-      legend: {
-          display: false
-      },
-      scales: {
-        xAxes : [{
-            type: 'linear',
-            ticks: {
-                min: 50,
-                max: 100,
-                stepSize: 5
-            },
-            gridLines: {
-                display: false
-            }
-        }]
-      },
-    }
+    options: lineChartOptions
   });
 
 //this gets the initial data for the chart
-callServer(currentYear)
+getBubbleChartData(currentYear)

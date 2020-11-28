@@ -12,6 +12,6 @@
 
 #chart-2 > canvas {
     border: 1px dashed green;
-    height: 350px !important;
-    width: 50% !important;
+    /* height: 350px !important; */
+    width: 100% !important;
 }
