@@ -31,6 +31,7 @@ class Country {
 //read files setup
 const fs = require("fs");
 const util = require("util");
+const { resolve } = require('path')
 const readFileAsync = util.promisify(fs.readFile);
 
 
@@ -47,7 +48,7 @@ async function readData(resolve, year) {
     resolve(parsedData)
 }
 
-const fillPopulationData = (years) => {
+const fillBubbleChartData = (years) => {
     let cty_stats = {}
     years.forEach(async year => {
         const data = await new Promise((resolve) => readData(resolve, year))
@@ -62,14 +63,38 @@ const handleSliderChange = (req, res) => {
     res.json(population_data[year]) 
 }
 
-/*ROUTES */
-app.post('/', handleSliderChange)
+async function read(resolve, year) {
+    const data = await readFileAsync(`store/country-data-${year}.csv`, 'utf-8')
+    const d = data.split('\r\n')
+    const arr = d.filter( line => line.includes('China') )
+    const splitArr = arr[0].split(', ')
+    const returnData = {x: parseInt(splitArr[2]), y: parseInt(splitArr[1])}
+    resolve(returnData)
+}
 
+function fillLineChartData(years) {
+    const lineData = []
+    years.forEach(async year => {
+        const data = await new Promise((resolve) => read(resolve, year))
+        lineData.push(data)
+    })
+    console.log(lineData);
+    return lineData
+}
+
+/*ROUTES */
+
+app.post('/', handleSliderChange)
+app.post('/line', (req, res) => {
+    console.log(lineData);
+    res.json(lineData)
+})
 
 /*ENTRY POINT */
 const years = [1975, 1980, 1985, 1990, 1995, 2000]
 
-const population_data = fillPopulationData(years)
+const population_data = fillBubbleChartData(years)
+const lineData = fillLineChartData(years)
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

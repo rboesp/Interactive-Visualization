@@ -2,10 +2,10 @@
 GLOBAL VARIABLES
 */
 var slider = document.getElementById("myRange");
-var sliderOutputEl = document.getElementById("demo");
+var sliderYearTxt = document.getElementById("demo");
 
 let startingYear = 1975
-sliderOutputEl.innerHTML = startingYear
+sliderYearTxt.innerHTML = startingYear
 
 let ctx = document.getElementById("myChart").getContext('2d');
 var ctx2 = document.getElementById('myChart2');
@@ -43,11 +43,6 @@ function updateChart(data) {
     bubbleChart.update()
 }
 
-function handleServerResponse(data) {
-    //this needs to be an update
-    updateChart(data)
-}
-
 
 //put in year in call
 function getBubbleChartData(year) {
@@ -59,14 +54,14 @@ EVENT LISTENERS
 */
 slider.oninput = async function() {
     const year = this.value
-    sliderOutputEl.innerHTML = year
+    sliderYearTxt.innerHTML = year
     const data = await getBubbleChartData(year)
     if(data) updateChart(data)
 }
 
 
 /*
-ENTRY POINT
+CHART OPTIONS
 */
 
 const bubbleChartOptions = {
@@ -115,7 +110,7 @@ const bubbleChartOptions = {
 };
 
 const lineChartOptions = {
-        maintainAspectRatio: false,
+    maintainAspectRatio: false,
     title: {
         display: true,
         text: 'GDP vs LIFESPAN CLOSEUP'
@@ -167,10 +162,22 @@ var lineChart = new Chart(ctx2, {
     options: lineChartOptions
   });
 
+function lineChartData(country) {
+    $.post(_URL +'/line/', {country: country}).then(data => {
+        lineChart.data.datasets[0].data = data
+        lineChart.update()
+    })
+}
+
 //this gets the initial data for the chart
 async function start(year) {
     const data = await getBubbleChartData(year)
     if(data) updateChart(data)
 }
 
+
+/*
+ENTRY POINT
+*/
 start(startingYear)
+lineChartData('China')
