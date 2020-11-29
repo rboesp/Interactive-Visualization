@@ -15,8 +15,8 @@ const bubbleChartOptions = {
             type: "logarithmic",
             position: 'left',
             ticks: {
-                min: 1,
-                max: 25000,
+                min: 5,
+                max: 55000,
                 callback: function (value, index, values) {
                     return Number(value.toString());//pass tick values as a string into Number function
                 }
@@ -32,14 +32,15 @@ const bubbleChartOptions = {
                 chartObj.ticks.push(1000);
                 chartObj.ticks.push(10000);
                 chartObj.ticks.push(25000);
+                chartObj.ticks.push(35000);
             }
         }],
         xAxes : [{
             type: 'linear',
             ticks: {
-                min: 25,
-                max: 100,
-                stepSize: 25
+                min: 30,
+                max: 85,
+                stepSize: 5
             },
             gridLines: {
                 display: false
