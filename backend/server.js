@@ -59,6 +59,7 @@ const fillBubbleChartData = (years) => {
 
 const handleSliderChange = (req, res) => {
     const year = parseInt(req.body.year)
+    console.log(year);
     if(!population_data[year]) res.json(false)
     res.json(population_data[year]) 
 }
@@ -99,9 +100,9 @@ function sortByYear( a, b ) {
 app.post('/', handleSliderChange)
 app.post('/line', (req, res) => {
     //here change countires to whatever comes in
-    console.log(lineData[req.body.country]);
+    // console.log(lineData[req.body.country]);
     lineData[req.body.country].sort(sortByYear) 
-    console.log(lineData[req.body.country]);
+    // console.log(lineData[req.body.country]);
     res.json(lineData[req.body.country])
 })
 
@@ -110,7 +111,10 @@ const years = [1975, 1980, 1985, 1990, 1995, 2000]
 
 const population_data = fillBubbleChartData(years)
 const lineData = {}
-let c = ['China', 'Japan', 'Nigeria', 'India', 'Brazil', 'Germany', 'France', 'United States', 'Argentina']
+//todo: not hard code these
+let c = ['China', 'Japan', 'Nigeria', 'India', 
+        'Brazil', 'Germany', 'France', 'United States', 
+        'Argentina', 'Chile', 'Colombia', 'Peru']
 c.forEach( co => {
     // console.log(co);
     lineData[co] = fillLineChartData(years, co)
