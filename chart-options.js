@@ -8,7 +8,7 @@ const bubbleChartOptions = {
     maintainAspectRatio: false,
     title: {
         display: true,
-        text: 'GDP vs LAND AREA vs LIFE EXPECTACY FROM 1975 - 2000'
+        text: 'GDP vs LIFE EXPECTACY FROM 1975 - 2020'
     },  
     scales: {
         yAxes : [{
@@ -16,7 +16,7 @@ const bubbleChartOptions = {
             position: 'left',
             ticks: {
                 min: 1,
-                max: 11000,
+                max: 25000,
                 callback: function (value, index, values) {
                     return Number(value.toString());//pass tick values as a string into Number function
                 }
@@ -31,6 +31,7 @@ const bubbleChartOptions = {
                 chartObj.ticks.push(100);
                 chartObj.ticks.push(1000);
                 chartObj.ticks.push(10000);
+                chartObj.ticks.push(25000);
             }
         }],
         xAxes : [{
@@ -73,7 +74,7 @@ const lineChartOptions = {
             position: 'bottom',
             ticks: {
                 min: 1,
-                max: 11000,
+                max: 25000,
                 callback: function (value, index, values) {
                     return Number(value.toString());//pass tick values as a string into Number function
                 }
@@ -88,6 +89,7 @@ const lineChartOptions = {
                 chartObj.ticks.push(100);
                 chartObj.ticks.push(1000);
                 chartObj.ticks.push(10000);
+                chartObj.ticks.push(25000);
             }
         }]
     }

@@ -107,7 +107,7 @@ app.post('/line', (req, res) => {
 })
 
 /*ENTRY POINT */
-const years = [1975, 1980, 1985, 1990, 1995, 2000]
+const years = [1975, 1980, 1985, 1990, 1995, 2000, 2005, 2010, 2015, 2020]
 
 const population_data = fillBubbleChartData(years)
 const lineData = {}
