@@ -58,9 +58,9 @@ const countryDataSets = [
         label: "Peru",
         data:[ ],
         backgroundColor: 'rgba(255, 206, 86, 0.2)'
-    }/*,
+    },
     {
-        label: "Pakistan",
+        label: "Norway",
         data: [],
         backgroundColor: 'rgba(75, 192, 192, 0.2)'
     },
@@ -75,18 +75,18 @@ const countryDataSets = [
         backgroundColor: 'rgba(255, 159, 64, 0.2)'
     },
     {
-        label: "Mexico",
+        label: "Malaysia",
         data:[ ],
         backgroundColor: "rgba(184,184,78,1)"
     },
-    {
-        label: "Honduras",
-        data: [],
-        backgroundColor: 'rgba(236,184,78,1)'
-    },
-    {
-        label: "Canada",
+        {
+        label: "Singapore",
         data: [],
         backgroundColor: "rgba(244,12,3,0.7)"
-    }*/
+    },
+    {
+        label: "Indonesia",
+        data: [],
+        backgroundColor: 'rgba(236,184,78,1)'
+    }
 ]

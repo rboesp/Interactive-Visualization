@@ -114,7 +114,8 @@ const lineData = {}
 //todo: not hard code these
 let c = ['China', 'Japan', 'Nigeria', 'India', 
         'Brazil', 'Germany', 'France', 'United States', 
-        'Argentina', 'Chile', 'Colombia', 'Peru']
+        'Argentina', 'Chile', 'Colombia', 'Peru', 'Norway', 
+        'Sweden', 'Finland', 'Malaysia', 'Singapore', 'Indonesia']
 c.forEach( co => {
     // console.log(co);
     lineData[co] = fillLineChartData(years, co)
