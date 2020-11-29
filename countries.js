@@ -2,7 +2,7 @@ const countryDataSets = [
     {
         label: "China",
         data: [],
-        backgroundColor: "red"
+        backgroundColor: "rgba(255, 102, 132, 0.2)"
     },
     {
         label: "Japan",
@@ -47,7 +47,7 @@ const countryDataSets = [
     {
         label: "Chili",
         data: [],
-        backgroundColor: 'rgba(255, 102, 132, 0.2)'
+        backgroundColor: 'red'
     },
     {
         label: "Colombia",
