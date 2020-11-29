@@ -36,7 +36,7 @@ const bubbleChartOptions = {
         xAxes : [{
             type: 'linear',
             ticks: {
-                min: 0,
+                min: 25,
                 max: 100,
                 stepSize: 25
             },
