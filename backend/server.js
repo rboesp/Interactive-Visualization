@@ -69,7 +69,7 @@ async function read(resolve, year, country) {
     const d = data.split('\r\n')
     const arr = d.filter( line => line.includes(country) )
     const splitArr = arr[0].split(', ')
-    const returnData = {year: year, x: parseInt(splitArr[2]), y: parseInt(splitArr[1])}
+    const returnData = {year: year, x: parseInt(splitArr[1]), y: parseInt(splitArr[2])}
     resolve(returnData)
 }
 

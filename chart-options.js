@@ -57,20 +57,37 @@ const lineChartOptions = {
         display: false
     },
     scales: {
-        xAxes : [{
+        yAxes : [{
             type: 'linear',
             ticks: {
                 min: 40,
-                max: 100,
+                max: 85,
                 stepSize: 5
             },
             gridLines: {
                 display: false
             }
         }],
-        yAxes: [{
+        xAxes: [{
+            type: "logarithmic",
+            position: 'bottom',
+            ticks: {
+                min: 1,
+                max: 11000,
+                callback: function (value, index, values) {
+                    return Number(value.toString());//pass tick values as a string into Number function
+                }
+            },
             gridLines: {
                 display: false
+            },
+            afterBuildTicks: function (chartObj) { //Build ticks labelling as per your need
+                chartObj.ticks = [];
+                chartObj.ticks.push(0);
+                chartObj.ticks.push(10);
+                chartObj.ticks.push(100);
+                chartObj.ticks.push(1000);
+                chartObj.ticks.push(10000);
             }
         }]
     }
