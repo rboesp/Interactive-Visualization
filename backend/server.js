@@ -100,9 +100,9 @@ function sortByYear( a, b ) {
 app.post('/', handleSliderChange)
 app.post('/line', (req, res) => {
     //here change countires to whatever comes in
-    // console.log(lineData[req.body.country]);
+    console.log(req.body.country);
     lineData[req.body.country].sort(sortByYear) 
-    // console.log(lineData[req.body.country]);
+    console.log(lineData[req.body.country]);
     res.json(lineData[req.body.country])
 })
 
