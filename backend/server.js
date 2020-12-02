@@ -5,7 +5,7 @@ class Country {
         this.name = data[0]
         this.y = parseInt(data[1]) //change here (2/2) to change x  and y axis
         this.x = parseInt(data[2])
-        this.r = data[3]*4 //to make the bubbles look bigger
+        this.r = data[3]*7 //to make the bubbles look bigger
     }
 }
 
