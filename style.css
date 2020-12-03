@@ -6,15 +6,15 @@
 
 #chart-1 > canvas {
     /* border: 1px dashed purple; */
-    height: 500px !important;
+    height: 700px !important;
     width: 100% !important;
-    background: rgb(2, 0, 15, 0.1);
+    /* background: rgb(2, 0, 15, 0.1); */
 }
 
 #chart-2 > canvas {
     /* border: 1px dashed green; */
-    height: 350px !important;
-    width: 100% !important;
-    background: rgb(2, 0, 36, 0.1);
+    height: 150px !important;
+    /* width: 100% !important; */
+    /* background: rgba(246, 245, 248, 0.1); */
     /* background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(57, 57, 82, 1) 35%, rgba(0, 212, 255, 1) 100%); */
 }

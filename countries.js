@@ -17,7 +17,7 @@ const countryDataSets = [
     {
         label: "India",
         data: [],
-        backgroundColor: "purple"
+        backgroundColor: "rgb(238,130,238, 0.3)"
     },
     {
         label: "Brazil",
