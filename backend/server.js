@@ -1,11 +1,18 @@
 /*GLOBAL VARIABLES */
 
+//to make the bubbles look bigger
+function makeBubbleBigger(x) {
+    console.log(x);
+    if(x > 5) return x*5; //5 == 500,000,000 pop
+    else return x*15
+}
+
 class Country {
     constructor(data) {
         this.name = data[0]
         this.y = parseInt(data[1]) //change here (2/2) to change x  and y axis
         this.x = parseInt(data[2])
-        this.r = data[3]*7 //to make the bubbles look bigger
+        this.r = makeBubbleBigger(data[3])
     }
 }
 
