@@ -12,7 +12,7 @@ const startingCountry = 'China'
 let ctx = document.getElementById("myChart").getContext('2d');
 var ctx2 = document.getElementById('myChart2');
 
-const _URL = 'http://moving-bubble-chart.herokuapp.com'//'http://localhost:3000'
+const _URL = 'https://moving-bubble-chart.herokuapp.com'
 
 /*
 FUNCTIONS
