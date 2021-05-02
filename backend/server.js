@@ -67,6 +67,7 @@ const fillBubbleChartData = (years) => {
 const handleSliderChange = (req, res) => {
     const year = parseInt(req.body.year)
     console.log(year);
+    console.log(population_data)
     if(!population_data[year]) res.json(false)
     res.json(population_data[year]) 
 }
