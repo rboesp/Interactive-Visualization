@@ -6,5 +6,5 @@ GDP vs Life Expectancy vs Population size of 18 random countries, 1975-2020
 * JavaScript 
 * Chart.js - https://www.chartjs.org/
 
-# Rough draft working example:
+# example:
 ![](./gifs/rough_draft.gif)
