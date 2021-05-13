@@ -11,20 +11,22 @@
 <body>
     <main class="main-content p-4">
         <div style="display: block;" class="loading">
-            <h1>Loading...🕐</h1>
+            <p>Loading...🕐</p>
             <div class="spinner spinner-border text-info m-5"></div>
         </div>
         <div style="display: none;" class="chart-container">
-            <h3>Change the slider for different years</h3>
+            <!-- <p>Change the slider for different years</p> -->
             <div class="slidecontainer">
                 <input type="range" min="1975" max="2020" value="50" class="slider" id="myRange">
+                <p style="font-size:smaller;" id='demo'></p>    
             </div>
-            <h4>YEAR: <span id="demo"></span></h4>    
-            <div id="chart-1">
-                <canvas id="myChart" width="200" height="200"></canvas>
-            </div>
-            <div id="chart-2" >
-                <canvas id="myChart2" height="100" width="100"></canvas>
+            <div class="charts">
+                <div id="chart-1">
+                    <canvas id="myChart" width="200" height="200"></canvas>
+                </div>
+                <div id="chart-2" >
+                    <canvas id="myChart2" height="100" width="100"></canvas>
+                </div>    
             </div>
         </div>    
     </main>

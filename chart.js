@@ -70,6 +70,7 @@ ENTRY POINT
  */
 const start = async () => {
     const data = await $.post(_URL, { year: startingYear })
+    console.log(data)
     stopSpinners()
     showChart()
     populateBubbleChart(data)
