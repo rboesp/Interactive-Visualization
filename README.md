@@ -1,6 +1,5 @@
-# Custom, interactive visualization 
-
-GDP vs Life Expectancy vs Population size of 18 random countries.
+# Moving bubbles chart
+GDP vs Life Expectancy vs Population size of 18 random countries, 1975-2020
 
 # Technologies
 
