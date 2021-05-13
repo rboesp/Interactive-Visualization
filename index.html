@@ -10,16 +10,16 @@
 </head>
 <body>
     <main class="main-content p-4">
-        <h3>Change the slider for different years</h3>
-        <div class="slidecontainer">
-            <input type="range" min="1975" max="2020" value="50" class="slider" id="myRange">
-        </div>
-        <h4>YEAR: <span id="demo"></span></h4>
         <div style="display: block;" class="loading">
-            <h1>Loading...</h1>
+            <h1>Loading...🕐</h1>
             <div class="spinner spinner-border text-info m-5"></div>
         </div>
         <div style="display: none;" class="chart-container">
+            <h3>Change the slider for different years</h3>
+            <div class="slidecontainer">
+                <input type="range" min="1975" max="2020" value="50" class="slider" id="myRange">
+            </div>
+            <h4>YEAR: <span id="demo"></span></h4>    
             <div id="chart-1">
                 <canvas id="myChart" width="200" height="200"></canvas>
             </div>
