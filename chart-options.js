@@ -1,15 +1,44 @@
 /*
 CHART OPTIONS
 */
-
+function n(num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
 const bubbleChartOptions = {
     onClick: clickOnBubble,
     responsive: true,
     maintainAspectRatio: false,
     title: {
         display: true,
-        text: "GDP vs LIFE EXPECTACY FROM 1975 - 2020",
+        text: "GDP vs LIFE EXPECTACY vs POPULATION: 1975 - 2020",
     },
+    legend: {
+        display: true,
+        position: "top",
+        labels: {
+            usePointStyle: true,
+            // fontColor: "blue",
+            fontSize: 6,
+        },
+    },
+    tooltips: {
+        callbacks: {
+            label: function (t, d) {
+                const title = d.datasets[t.datasetIndex].label
+                return `${title.toUpperCase()} : Avg. age: ${t.xLabel} yrs, GDP: ${n(t.yLabel)} mill`
+            },
+        },
+    },
+    // plugins: {
+    //     tooltip: {
+    //         callbacks: {
+    //             footer: function (tooltipItems) {
+    //                 console.log(toolTipItem)
+    //                 return 2
+    //             },
+    //         },
+    //     },
+    // },
     scales: {
         yAxes: [
             {
@@ -27,18 +56,12 @@ const bubbleChartOptions = {
                     },
                 },
                 gridLines: {
-                    display: false,
+                    display: true,
                 },
                 afterBuildTicks: function (chartObj) {
                     //Build ticks labelling as per your need
-                    chartObj.ticks = []
-                    chartObj.ticks.push(0)
-                    chartObj.ticks.push(10)
-                    chartObj.ticks.push(100)
-                    chartObj.ticks.push(1000)
-                    chartObj.ticks.push(10000)
-                    chartObj.ticks.push(25000)
-                    chartObj.ticks.push(35000)
+                    const nums = [0, 10, 100, 1000, 10000, 25000, 35000]
+                    chartObj.ticks = nums
                 },
             },
         ],

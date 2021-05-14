@@ -14,13 +14,17 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid">
+                <h1 class="navbar-brand">🌎 World Analysis</h1>
+            </div>
+        </nav>
         <main class="main-content p-4">
             <div style="display: block" class="loading text-center mt-5 p-5">
                 <p>Loading...🕐</p>
                 <div class="spinner spinner-border text-info m-5"></div>
             </div>
             <div style="display: none" class="chart-container">
-                <p>Change the slider for different years</p>
                 <div class="slidecontainer">
                     <input type="range" min="1975" max="2020" value="50" class="slider" id="myRange" />
                     <p style="font-size: smaller" id="demo"></p>
@@ -41,9 +45,22 @@
             crossorigin="anonymous"
         ></script>
         <script src="countries.js"></script>
-        <script src="chart.js"></script>
+        <script src="script.js"></script>
         <script src="chart-options.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
     </body>
 </html>
+
+<!-- toast -->
+<!--
+<div class="toast" data-delay="10000" data-animation="true">
+    <div class="toast-header">
+        <strong class="mr-auto">Robert Boespflug</strong>
+        <small class="text-muted m-1"> 5/14/2021 </small>
+        <button type="button" class="m-2 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="toast-body">Under production ⚒, so you may see some bugs 🐛, especially when reloading 🔄!</div>
+</div> -->

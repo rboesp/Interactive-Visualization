@@ -27,7 +27,7 @@ const clickOnBubble = (event, item) => {
 
 const popluateLineChart = async (country) => {
     const data = await $.post(_URL + "/line/", { country: country })
-    if (!data) return
+    if (!data || !lineChart) return
     lineChart.data.datasets[0].data = data
     lineChart.update()
 }
