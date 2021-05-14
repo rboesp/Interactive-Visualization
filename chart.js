@@ -61,13 +61,6 @@ slider.oninput = async function () {
 /*
 ENTRY POINT
 */
-
-//here change!!
-/**
- * show spinners
- * get data
- * then stop spinners, show data
- */
 const start = async () => {
     const data = await $.post(_URL, { year: startingYear })
     console.log(data)
