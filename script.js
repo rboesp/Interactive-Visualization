@@ -52,11 +52,30 @@ const showChart = () => {
 EVENT LISTENERS
 */
 slider.oninput = async function () {
+    console.log("fired!!")
     const year = this.value
+    setSliderYear(year)
+}
+
+const event = new Event("input")
+
+async function setSliderYear(year) {
+    slider.value = year
     sliderYearTxt.innerHTML = year
     const data = await $.post(_URL, { year: year })
     populateBubbleChart(data)
 }
+function checkKey(e) {
+    const year = parseInt(slider.value)
+    if (e.keyCode == "37") {
+        // left arrow -- going down
+        setSliderYear(year === 1975 ? 1975 : year - 5)
+    } else if (e.keyCode == "39") {
+        // right arrow -- going up
+        setSliderYear(year === 2020 ? 2020 : year + 5)
+    }
+}
+document.onkeydown = checkKey
 
 /*
 ENTRY POINT

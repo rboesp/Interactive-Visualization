@@ -23,22 +23,12 @@ const bubbleChartOptions = {
     },
     tooltips: {
         callbacks: {
-            label: function (t, d) {
-                const title = d.datasets[t.datasetIndex].label
-                return `${title.toUpperCase()} : Avg. age: ${t.xLabel} yrs, GDP: ${n(t.yLabel)} mill`
+            label: function (tooltipItem, data) {
+                const title = data.datasets[tooltipItem.datasetIndex].label
+                return `${title.toUpperCase()} : Avg. age: ${tooltipItem.xLabel} yrs, GDP: ${n(tooltipItem.yLabel)} mill`
             },
         },
     },
-    // plugins: {
-    //     tooltip: {
-    //         callbacks: {
-    //             footer: function (tooltipItems) {
-    //                 console.log(toolTipItem)
-    //                 return 2
-    //             },
-    //         },
-    //     },
-    // },
     scales: {
         yAxes: [
             {
