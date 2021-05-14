@@ -12,7 +12,11 @@ const startingCountry = "China"
 let ctx = document.getElementById("myChart").getContext("2d")
 var ctx2 = document.getElementById("myChart2")
 
-const _URL = "https://moving-bubble-chart.herokuapp.com"
+const DATA_URL = "https://moving-bubble-chart.herokuapp.com"
+
+/**slider limits */
+const limitBottom = 1975
+const limitTop = 2020
 
 /*
 FUNCTIONS
@@ -26,7 +30,7 @@ const clickOnBubble = (event, item) => {
 }
 
 const popluateLineChart = async (country) => {
-    const data = await $.post(_URL + "/line/", { country: country })
+    const data = await $.post(DATA_URL + "/line/", { country: country })
     if (!data || !lineChart) return
     lineChart.data.datasets[0].data = data
     lineChart.update()
@@ -62,17 +66,17 @@ const event = new Event("input")
 async function setSliderYear(year) {
     slider.value = year
     sliderYearTxt.innerHTML = year
-    const data = await $.post(_URL, { year: year })
+    const data = await $.post(DATA_URL, { year: year })
     populateBubbleChart(data)
 }
 function checkKey(e) {
     const year = parseInt(slider.value)
     if (e.keyCode == "37") {
         // left arrow -- going down
-        setSliderYear(year === 1975 ? 1975 : year - 5)
+        setSliderYear(year === limitBottom ? limitBottom : year - 5)
     } else if (e.keyCode == "39") {
         // right arrow -- going up
-        setSliderYear(year === 2020 ? 2020 : year + 5)
+        setSliderYear(year === limitTop ? limitTop : year + 5)
     }
 }
 document.onkeydown = checkKey
@@ -81,7 +85,7 @@ document.onkeydown = checkKey
 ENTRY POINT
 */
 const start = async () => {
-    const data = await $.post(_URL, { year: startingYear })
+    const data = await $.post(DATA_URL, { year: startingYear })
     console.log(data)
     stopSpinners()
     showChart()
@@ -89,4 +93,5 @@ const start = async () => {
     popluateLineChart(startingCountry)
 }
 
+$(".toast").toast("show")
 start()
