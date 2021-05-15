@@ -17,7 +17,6 @@ const bubbleChartOptions = {
         position: "top",
         labels: {
             usePointStyle: true,
-            // fontColor: "blue",
             fontSize: 20,
         },
     },
