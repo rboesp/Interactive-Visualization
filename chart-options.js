@@ -18,7 +18,7 @@ const bubbleChartOptions = {
         labels: {
             usePointStyle: true,
             // fontColor: "blue",
-            fontSize: 10,
+            fontSize: 20,
         },
     },
     tooltips: {
